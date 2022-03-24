@@ -22,6 +22,5 @@
          "rejectUnauthorized": false
        }
      }
-   },
-   "host": "postgres://lqyatkhxnqbqgr:dbeaaec3cda744319255ab0b6d12fc6b69d55cd297725e94d51b0092f20658b9@ec2-3-225-213-67.compute-1.amazonaws.com:5432/d2ssmfll7k8as8"
+  }
 }

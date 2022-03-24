@@ -1,0 +1,25 @@
+{
+  "name": "event-planner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylanplayer/event-planner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dylanplayer/event-planner/issues"
+  },
+  "homepage": "https://github.com/dylanplayer/event-planner#readme",
+  "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.5",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3"
+  }
+}

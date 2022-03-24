@@ -77,6 +77,14 @@ app.put('/events/:id', (req, res) => {
   });
 });
 
+app.delete('/events/:id', (req, res) => {
+  models.Event.findOne({ where: { id: req.params.id } }).then((event) => {
+    event.destroy().then(() => {
+      res.redirect('/');
+    })
+  })
+})
+
 app.post('/events', (req, res) => {
   models.Event.create(req.body)
   .then(event => {

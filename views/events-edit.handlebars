@@ -3,8 +3,11 @@
     <h1 class="card-title">Update Event</h1>
   </div>
   <div class="card-body">
-    <form method="POST" action="/events/{{event.id}}?_method=PUT">
-     {{> events-form }}
+    <form method="POST" action="/events/{{event.id}}?_method=PUT" class="mb-1">
+      {{> events-form }}
+    </form>
+    <form action="/events/{{event.id}}?_method=DELETE" class="w-100" method="POST">
+      <button type="submit" class='btn btn-danger w-100'>Delete</button>
     </form>
   </div>
 </div>

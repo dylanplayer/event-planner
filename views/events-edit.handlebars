@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-header">
+    <h1 class="card-title">Update Event</h1>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="/events/{{event.id}}?_method=PUT">
+     {{> events-form }}
+    </form>
+  </div>
+</div>

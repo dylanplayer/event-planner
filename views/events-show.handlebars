@@ -1,0 +1,13 @@
+<div id="eventSlides" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{event.imgUrl}}" class="d-block w-100" alt="{{event.title}}">
+    </div>
+  </div>
+</div>
+
+<h1>{{event.title}}</h1>
+<p>{{event.desc}}</p>
+
+<a class="btn btn-primary" href="/events/{{event.id}}/edit">EDIT</a>
+<a class="btn btn-success" href="/events/{{event.id}}/rsvp">RSVP</a>

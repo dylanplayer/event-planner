@@ -1,0 +1,17 @@
+ <fieldset>
+  <div class="mb-3">
+    <label class="form-label" for="title">Title</label><br>
+    <input class="form-control" value="{{event.title}}" type="text" name="title" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="imgUrl">Image URL</label><br>
+    <input class="form-control" value="{{event.imgUrl}}" type="text" name="imgUrl" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="desc">Description</label><br>
+    <textarea class="form-control" type="text" name="desc">{{event.desc}}</textarea>
+  </div>
+</fieldset>
+<div class="d-flex flex-row justify-content-end">
+  <button type="submit" class="btn btn-primary">Save</button>
+</div>

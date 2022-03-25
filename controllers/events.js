@@ -1,10 +1,6 @@
-module.exports = function (app, models) {
-  app.get('/events', (req, res) => {
-    res.render('events-index', { events: events });
-  });
-  
+module.exports = function (app, prisma) {  
   app.post('/events', (req, res) => {
-    models.Event.create(req.body)
+    prisma.Event.create({data: req.body})
     .then(event => {
       res.redirect('/');
     })
@@ -18,13 +14,14 @@ module.exports = function (app, models) {
   });
   
   app.get('/events/:id', (req, res) => {
-    models.Event.findOne({ where: { id: req.params.id } })
+    prisma.Event.findUnique({ where: { id: Number(req.params.id)  }, include: { rsvps: true } })
     .then((event) => {
       event = {
         id: event.id,
         title: event.title,
         desc: event.desc,
         imgUrl: event.imgUrl,
+        rsvps: event.rsvps,
         createdAt: event.createdAt,
         updatedAt: event.updatedAt,
       }
@@ -33,7 +30,7 @@ module.exports = function (app, models) {
   });
   
   app.get('/events/:id/edit', (req, res) => {
-    models.Event.findOne({ where: { id: req.params.id } })
+    prisma.Event.findUnique({ where: { id: Number(req.params.id)  } })
     .then((event) => {
       event = {
         id: event.id,
@@ -48,19 +45,32 @@ module.exports = function (app, models) {
   });
   
   app.put('/events/:id', (req, res) => {
-    models.Event.findOne({ where: { id: req.params.id } })
+    prisma.Event.update({ where: { id: Number(req.params.id)}, data: req.body })
     .then((event) => {
-      event.update(req.body).then((event) => {
-        res.redirect(`/events/${event.id}`);
-      })
+      res.redirect(`/events/${event.id}`);
     });
   });
   
   app.delete('/events/:id', (req, res) => {
-    models.Event.findOne({ where: { id: req.params.id } }).then((event) => {
-      event.destroy().then(() => {
+    prisma.Event.delete({ where: { id: Number(req.params.id) } }).then(
+      () => {
         res.redirect('/');
-      })
-    })
-  });  
+      }
+    )
+  });
+
+  app.post('/events/:id/rsvp', (req, res) => {
+    req.body.eventId = Number(req.params.id);
+    prisma.Rsvp.create({ data: req.body }).then((rsvp) => {
+      res.redirect(`/events/${req.params.id}`);
+    });
+  });
+
+  app.delete('/events/:eventId/rsvp/:id', (req, res) => {
+    prisma.Rsvp.delete({ where: { id: Number(req.params.id) } }).then(
+      () => {
+        res.redirect(`/events/${req.params.eventId}`);
+      }
+    );
+  });
 }

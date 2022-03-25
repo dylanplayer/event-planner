@@ -1,17 +1,13 @@
-<a href="/events/new" class="btn btn-primary">New Event</a>
-
-<div class="d-flex flex-row align-items-center justify-content-center gap-1" style="max-width: 1300px; flex-wrap: wrap;">
+<div class="d-flex flex-row align-items-center justify-content-center" style="max-width: 1300px; flex-wrap: wrap;">
   {{#each events}}
-    <div class="card rounded" style="max-width: 400px;">
-      <div class="card-header">
-        Event
-      </div>
+    <div class="card rounded m-2" style="width: 350px; height: 350px;">
       <img class="card-img-top" src="{{this.imgUrl}}" alt="Card image cap">
       <div class="card-body">
-        <h2 class="card-title">{{this.title}}</h2>
+        <h2 class="card-title h4">{{this.title}}</h2>
         <p class="card-text">{{this.description}}</p>
-        <a href="/events/{{this.id}}/rsvp" class="btn btn-success">RSVP</a>
-        <a href="/events/{{this.id}}" class="btn btn-primary">VIEW</a>
+      </div>
+      <div class="card-footer">
+        <a href="/events/{{this.id}}" class="btn btn-primary w-100 align-self-center">VIEW</a>
       </div>
     </div>
   {{/each}}

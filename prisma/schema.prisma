@@ -1,0 +1,24 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Event {
+  id      Int         @id @default(autoincrement())
+  title   String
+  desc    String
+  imgUrl  String
+  rsvps   Rsvp[]
+}
+
+model Rsvp {
+  id      Int     @id @default(autoincrement())
+  name    String
+  email   String
+  eventId Int
+  event   Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}

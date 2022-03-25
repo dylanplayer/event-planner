@@ -1,13 +1,70 @@
-<div id="eventSlides" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{{event.imgUrl}}" class="d-block w-100" alt="{{event.title}}">
+<div class="row mt-4">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <div id="eventSlides" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{event.imgUrl}}" class="d-block w-100" alt="{{event.title}}">
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="card-body">
+        <h1>{{event.title}}</h1>
+        <p>{{event.desc}}</p>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="/events/{{event.id}}/edit">EDIT</a>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4 col-lg-4 offset-lg-1">
+    <div class="d-flex flex-row align-items-center justify-content-between">
+      <h1>RSVPs</h1>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rsvpModal">RSVP</button>
+    </div>
+    <div class="list-group mt-4">
+        {{#each event.rsvps}}
+          <div class="list-group-item d-flex flex-row align-items-center justify-content-between">
+            {{this.name}}
+            <form class="form-inline" action="/events/{{this.eventId}}/rsvp/{{this.id}}?_method=DELETE" method="post">
+              <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+            </form>
+          </div>
+        {{/each}}
+    </div>
+  </div>
+  <div class="modal fade" id="rsvpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rsvpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title h5">New RSVP</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/events/{{event.id}}/rsvp" method="POST">
+          <div class="modal-body">
+            <p>Event: {{event.title}}</p>
+              <fieldset>
+                <div class="mb-3">
+                  <label class="form-label" for="name">Name</label><br>
+                  <input class="form-control" required type="text" name="name" placeholder="Jane Doe"/>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="email">Email</label><br>
+                  <input class="form-control" required type="email" name="email" placeholder="example@gmail.com"/>
+                </div>
+              </fieldset>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+            <button class="btn btn-primary" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
 
-<h1>{{event.title}}</h1>
-<p>{{event.desc}}</p>
 
-<a class="btn btn-primary" href="/events/{{event.id}}/edit">EDIT</a>
-<a class="btn btn-success" href="/events/{{event.id}}/rsvp">RSVP</a>
+

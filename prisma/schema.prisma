@@ -13,12 +13,24 @@ model Event {
   desc    String
   imgUrl  String
   rsvps   Rsvp[]
+  ownerId Int
+  owner   User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }
 
 model Rsvp {
-  id      Int     @id @default(autoincrement())
-  name    String
-  email   String
   eventId Int
   event   Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId  Int
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([eventId, userId])
+}
+
+model User {
+  id          Int       @id @default(autoincrement())
+  name        String
+  email       String    @unique
+  password    String
+  rsvps       Rsvp[]
+  events      Event[]
 }

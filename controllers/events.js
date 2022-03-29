@@ -2,6 +2,8 @@ module.exports = function (app, prisma) {
   app.post('/events', (req, res) => {
     if (res.locals.currentUser) {
       req.body.ownerId = res.locals.currentUser.id;
+      req.body.date = new Date(`${req.body.date}Z`);
+      req.body.date = new Date(req.body.date.getTime() + req.body.date.getTimezoneOffset() * 60000);
       prisma.Event.create({data: req.body})
         .then(event => {
           res.redirect('/');
@@ -33,8 +35,8 @@ module.exports = function (app, prisma) {
           imgUrl: event.imgUrl,
           rsvps: event.rsvps,
           owner: event.owner,
-          createdAt: event.createdAt,
-          updatedAt: event.updatedAt,
+          date: event.date.toLocaleString(),
+          location: event.location,
         }
         const currentUserOwnsEvent = res.locals.currentUser && res.locals.currentUser.id == event.owner.id;
         const currentUserNotInRsvps = res.locals.currentUser && event.rsvps.find(rsvp => rsvp.user.id == res.locals.currentUser.id) == null;
@@ -53,8 +55,8 @@ module.exports = function (app, prisma) {
             desc: event.desc,
             imgUrl: event.imgUrl,
             owner: event.owner,
-            createdAt: event.createdAt,
-            updatedAt: event.updatedAt,
+            date: (new Date(event.date.getTime() - event.date.getTimezoneOffset() * 60000).toISOString()).slice(0, -1),
+            location: event.location,
           }
           if (res.locals.currentUser.id == event.owner.id) {
             res.render('events-edit', { event: event })
@@ -73,6 +75,8 @@ module.exports = function (app, prisma) {
       prisma.Event.findUnique({ where: { id: Number(req.params.id)  }, include: { owner:true } }).then(
         (event) => {
           if (res.locals.currentUser.id == event.owner.id) {
+            req.body.date = new Date(`${req.body.date}Z`);
+            req.body.date = new Date(req.body.date.getTime() + req.body.date.getTimezoneOffset() * 60000);
             prisma.Event.update({ where: { id: Number(req.params.id)}, data: req.body })
               .then((event) => {
                 res.redirect(`/events/${event.id}`);

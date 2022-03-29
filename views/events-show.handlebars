@@ -16,7 +16,9 @@
       </div>
       <div class="card-body">
         <h1>{{event.title}}</h1>
+        <p class="text-muted"><time datetime="{{event.date}}">{{event.date}}</time></p>
         <p>{{event.desc}}</p>
+        <address class="text-muted">{{event.location}}</address>
       </div>
       <div class="card-footer">
         {{#if currentUser}}

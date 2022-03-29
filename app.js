@@ -49,10 +49,9 @@ app.get('/',
         return {
           id: event.id,
           title: event.title,
-          desc: event.desc,
           imgUrl: event.imgUrl,
-          createdAt: event.createdAt,
-          updatedAt: event.updatedAt,
+          date: event.date.toLocaleString(),
+          location: event.location,
         }
       })
       res.render('events-index', { events: events })

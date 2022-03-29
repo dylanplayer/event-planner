@@ -8,13 +8,15 @@ generator client {
 }
 
 model Event {
-  id      Int         @id @default(autoincrement())
-  title   String
-  desc    String
-  imgUrl  String
-  rsvps   Rsvp[]
-  ownerId Int
-  owner   User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  id        Int         @id @default(autoincrement())
+  title     String
+  desc      String
+  imgUrl    String
+  date      DateTime
+  location  String
+  rsvps     Rsvp[]
+  ownerId   Int
+  owner     User        @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }
 
 model Rsvp {

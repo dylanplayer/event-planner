@@ -1,15 +1,23 @@
  <fieldset>
   <div class="mb-3">
-    <label class="form-label" for="title">Title</label><br>
-    <input class="form-control" value="{{event.title}}" type="text" name="title" />
+    <label class="form-label" for="title">Title</label>
+    <input class="form-control" required value="{{event.title}}" type="text" name="title" placeholder="enter event title"/>
   </div>
   <div class="mb-3">
-    <label class="form-label" for="imgUrl">Image URL</label><br>
-    <input class="form-control" value="{{event.imgUrl}}" type="text" name="imgUrl" />
+    <label class="form-label" for="imgUrl">Image URL</label>
+    <input class="form-control" required value="{{event.imgUrl}}" type="text" name="imgUrl" placeholder="enter url of event image"/>
   </div>
   <div class="mb-3">
-    <label class="form-label" for="desc">Description</label><br>
-    <textarea class="form-control" type="text" name="desc">{{event.desc}}</textarea>
+    <label class="form-label" for="date">Date</label>
+    <input class="form-control" required value="{{event.date}}" type="datetime-local" name="date" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="location">Location</label>
+    <input class="form-control" required value="{{event.location}}" type="text" name="location" placeholder="enter event location e.g. online"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="desc">Description</label>
+    <textarea class="form-control" required type="text" name="desc">{{event.desc}}</textarea>
   </div>
 </fieldset>
 <div class="d-flex flex-row align-items-center justify-content-end gap-1 w-100">
